@@ -1,96 +1,91 @@
-<div class="max-w-4xl mx-auto mt-8 p-6 bg-white shadow-xl rounded-lg">
-  <h2 class="text-2xl font-bold text-center text-blue-600">Instructor Panel</h2>
+<div class="container mt-4">
+  <div class="card shadow-lg p-4 border-0 rounded-4">
+    <h2 class="text-center mb-4 fw-bold text-primary">Instructor Panel</h2>
 
-  <!-- Course Name -->
-  <div class="mt-6">
-    <label for="courseName" class="block text-lg font-semibold">Course Name:</label>
-    <input type="text" id="courseName" [(ngModel)]="courseName"
-           class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-           placeholder="Enter course name">
-  </div>
-
-  <!-- Feature Selection -->
-  <div class="mt-6">
-    <label class="block text-lg font-semibold">Select Course Components:</label>
-    <div class="grid grid-cols-2 gap-2 mt-2">
-      <div *ngFor="let item of gradingComponents" class="flex items-center space-x-2">
-        <input type="checkbox" [value]="item" (change)="toggleComponent(item, $event)"
-               class="w-4 h-4 text-blue-600 focus:ring-blue-500">
-        <label class="text-gray-700">{{ item }}</label>
-      </div>
+    <!-- Course Name -->
+    <div class="mb-4">
+      <label for="courseName" class="form-label fw-semibold">Course Name:</label>
+      <input type="text" id="courseName" [(ngModel)]="courseName" class="form-control border-2 shadow-sm" placeholder="Enter course name">
     </div>
-  </div>
 
-  <!-- Weightage Section -->
-  <div class="mt-6 p-4 border border-gray-300 rounded-lg bg-gray-50">
-    <label class="block text-lg font-semibold text-gray-700">Assign Weightage (Total must be 100%)</label>
-    <div class="grid grid-cols-2 gap-4 mt-2">
-      <div *ngFor="let component of selectedComponents">
-        <label class="block text-gray-700">{{ component }} (%)</label>
-        <input type="number" [(ngModel)]="gradingScheme[component]" 
-               class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-               (input)="validateTotalWeight()" placeholder="Enter weight">
+    <!-- Feature Selection -->
+    <div class="mb-4">
+      <label class="form-label fw-bold">Select Course Components:</label>
+      <div class="row row-cols-2 g-2">
+        <div class="col form-check" *ngFor="let item of gradingComponents">
+          <input type="checkbox" class="form-check-input" [value]="item" (change)="toggleComponent(item, $event)">
+          <label class="form-check-label">{{ item }}</label>
+        </div>
       </div>
     </div>
 
-    <!-- Progress Bar -->
-    <div class="w-full bg-gray-200 h-3 rounded-lg mt-3">
-      <div class="h-3 rounded-lg transition-all duration-300"
-           [class.bg-green-500]="totalGradingWeight === 100"
-           [class.bg-red-500]="totalGradingWeight !== 100"
-           [style.width.%]="totalGradingWeight"></div>
+    <!-- Weightage Section -->
+    <div class="mb-4 p-3 border rounded-3 bg-light">
+      <label class="form-label fw-bold text-secondary">Assign Weightage (Total must be 100%)</label>
+      <div class="row g-2">
+        <div class="col-md-6" *ngFor="let component of selectedComponents">
+          <label class="form-label">{{ component }} (%)</label>
+          <input type="number" [(ngModel)]="gradingScheme[component]" class="form-control border-2 shadow-sm"
+                (input)="validateTotalWeight()" placeholder="Enter weight">
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress mt-3 rounded-3" style="height: 15px;">
+        <div class="progress-bar progress-bar-striped" 
+             [class.bg-danger]="totalGradingWeight !== 100" 
+             [style.width.%]="totalGradingWeight" role="progressbar">
+          {{ totalGradingWeight }}%
+        </div>
+      </div>
+      <p *ngIf="totalGradingWeight !== 100" class="text-danger mt-2 fw-semibold">
+        Total must be 100% (Current: {{ totalGradingWeight }}%)
+      </p>
     </div>
-    <p *ngIf="totalGradingWeight !== 100" class="text-red-500 text-sm mt-2 font-semibold">
-      Total must be 100% (Current: {{ totalGradingWeight }}%)
-    </p>
-  </div>
 
-  <!-- Class Attribute Selection -->
-  <div class="mt-6" *ngIf="previewColumns.length > 0">
-    <label for="classAttribute" class="block text-lg font-semibold">Select Class Attribute:</label>
-    <select id="classAttribute" [(ngModel)]="classAttribute"
-            class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none">
-      <option *ngFor="let col of previewColumns" [value]="col">{{ col }}</option>
-    </select>
-  </div>
-
-  <!-- File Upload -->
-  <div class="mt-6">
-    <label for="fileUpload" class="block text-lg font-semibold">Upload CSV File:</label>
-    <input type="file" id="fileUpload" (change)="onFileSelected($event)"
-           class="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none">
-  </div>
-
-  <!-- Update Data Button -->
-  <button (click)="updateCSVData()"
-          class="w-full mt-4 p-2 bg-gray-700 text-white font-semibold rounded-lg hover:bg-gray-800 transition"
-          [disabled]="!selectedFile">
-    Update Data
-  </button>
-
-  <!-- CSV Preview -->
-  <div *ngIf="previewData.length > 0" class="mt-6">
-    <h4 class="text-center text-lg font-bold text-blue-600">CSV Preview (First 5 Rows)</h4>
-    <div class="overflow-auto rounded-lg shadow-md">
-      <table class="w-full border border-gray-200 rounded-lg">
-        <thead class="bg-gray-800 text-white">
-          <tr>
-            <th *ngFor="let col of previewColumns" class="p-2">{{ col }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let row of previewData" class="odd:bg-gray-100 even:bg-gray-50">
-            <td *ngFor="let col of previewColumns" class="p-2">{{ row[col] }}</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Class Attribute Selection -->
+    <div class="mb-4" *ngIf="previewColumns.length > 0">
+      <label for="classAttribute" class="form-label fw-semibold">Select Class Attribute:</label>
+      <select id="classAttribute" [(ngModel)]="classAttribute" class="form-select shadow-sm">
+        <option *ngFor="let col of previewColumns" [value]="col">{{ col }}</option>
+      </select>
     </div>
-  </div>
 
-  <!-- Upload Button -->
-  <button (click)="submitData()" 
-          class="w-full mt-4 p-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition"
-          [disabled]="!isDataConfirmed || !classAttribute || totalGradingWeight !== 100">
-    Upload Data
-  </button>
+    <!-- File Upload -->
+    <div class="mb-4">
+      <label for="fileUpload" class="form-label fw-semibold">Upload CSV File:</label>
+      <input type="file" id="fileUpload" (change)="onFileSelected($event)" class="form-control border-2 shadow-sm">
+    </div>
+
+    <!-- Update Data Button -->
+    <button (click)="updateCSVData()" class="btn btn-outline-secondary w-100 py-2" 
+            [disabled]="!selectedFile">
+      Update Data
+    </button>
+
+    <!-- CSV Preview -->
+    <div *ngIf="previewData.length > 0" class="mt-4">
+      <h4 class="text-center fw-bold text-primary">CSV Preview (First 5 Rows)</h4>
+      <div class="table-responsive rounded-3 shadow-sm">
+        <table class="table table-striped table-hover border rounded-3">
+          <thead class="table-dark">
+            <tr>
+              <th *ngFor="let col of previewColumns">{{ col }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of previewData">
+              <td *ngFor="let col of previewColumns">{{ row[col] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Upload Button -->
+    <button (click)="submitData()" class="btn btn-primary w-100 mt-3 py-2 fw-semibold" 
+            [disabled]="!isDataConfirmed || !classAttribute || totalGradingWeight !== 100">
+      Upload Data
+    </button>
+  </div>
 </div>
