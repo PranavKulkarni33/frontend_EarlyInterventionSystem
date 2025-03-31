@@ -1,7 +1,11 @@
 .header-blue {
+  /* background: linear-gradient(135deg, #fe2929, #ffb3c5); */
+  /* background-color: #006699; */
+  font-family: 'Source Sans Pro', sans-serif;
+}
+.header-blue nav {
     /* background: linear-gradient(135deg, #fe2929, #ffb3c5); */
-    background-color: #006699;
-    font-family: 'Source Sans Pro', sans-serif;
+    background-color: #006699 !important;
   }
 
   .log-sin{
@@ -135,24 +139,8 @@
     color: #d9d9d9;
   }
   
-  .header-blue .navbar .form-inline .search-field {
-    display: inline-block;
-    width: 80%;
-    background: none;
-    border: none;
-    border-bottom: 1px solid transparent;
-    border-radius: 0;
-    color: #fff;
-    box-shadow: none;
-    color: inherit;
-    transition: border-bottom-color 0.3s;
-  }
-  
-  .header-blue .navbar .form-inline .search-field:focus {
-    border-bottom: 1px solid #ccc;
-  }
-  
   .header-blue .hero {
+    color: #1f1f1f;
     margin-top: 20px;
     text-align: center;
   }
@@ -165,7 +153,6 @@
   }
   
   .header-blue .hero h1 {
-    color: #fff;
     font-size: 40px;
     margin-top: 0;
     margin-bottom: 15px;
@@ -182,7 +169,6 @@
   }
   
   .header-blue .hero p {
-    color: rgba(255,255,255,0.8);
     font-size: 20px;
     margin-bottom: 30px;
     font-weight: 300;

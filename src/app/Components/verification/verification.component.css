@@ -1,0 +1,44 @@
+:root {
+    font-size: 125%;
+  }
+  
+  
+  .verification-page {
+    font: 1em/1.618 Inter, sans-serif;
+    margin: 0;
+    color: #224;
+    background-color: #f1f1f1;
+  }
+  
+  p {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  
+  p:not(:last-child) {
+    margin-bottom: 1.5em;
+  }
+  
+  .site-container {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    padding: 1.5em;
+  }
+  
+  .card {
+    max-width: 400px;
+    min-height: 200px;
+    color: #f1f1f1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 500px;
+    height: 300px;
+    padding: 35px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 20px;
+    background-color: #006699;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(15px);
+  }
