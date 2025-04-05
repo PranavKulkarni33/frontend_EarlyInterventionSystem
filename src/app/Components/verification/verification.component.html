@@ -1,9 +1,30 @@
 <div class="verification-page">
-    <div class="site-container">
+  <div class="site-container">
 
-        <div class="card">
-          <p>A verification email has been sent to the email you entered. Please click on the link in the email to continue.</p>
-          <p>Please wait for a couple of minues and check your Spam folder as well.</p>
-        </div> 
+    <div class="card">
+      <p>A verification email has been sent to the email you entered. Please click on the link in the email to continue.</p>
+      <p>Please wait for a couple of minutes and check your Spam folder as well.</p>
+
+      <div class="form-group mt-4">
+        <input type="email" class="form-control" placeholder="Enter your email" [(ngModel)]="user.email" name="email">
+      </div>
+
+      <div class="form-group mt-3">
+        <input type="text" class="form-control" placeholder="Enter verification code" [(ngModel)]="user.code" name="code">
+      </div>
+
+      <div class="mt-3 d-flex justify-content-between">
+        <button class="btn btn-primary" (click)="confirmSignup()">Verify Email</button>
+        <button class="btn btn-secondary" (click)="resendCode()">Resend Code</button>
+      </div>
+
+      <div *ngIf="successMessage" class="text-success mt-3 text-center">
+        {{ successMessage }}
+      </div>
+      <div *ngIf="errorMessage" class="text-danger mt-2 text-center">
+        {{ errorMessage }}
+      </div>
     </div>
+
+  </div>
 </div>

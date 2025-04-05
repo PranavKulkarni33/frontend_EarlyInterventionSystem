@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { InstructorService } from 'src/app/Services/instructor.service';
 import * as Papa from 'papaparse';
+import { AuthService } from 'src/app/Services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-instructor',
@@ -21,7 +23,7 @@ export class InstructorComponent {
   isDataConfirmed: boolean = false;
   updatedCSV: string = '';  // Stores the processed CSV data
 
-  constructor(private instructorService: InstructorService) {}
+  constructor(private instructorService: InstructorService, private auth : AuthService, private router: Router) {}
 
   toggleComponent(component: string, event: any) {
     if (event.target.checked) {
@@ -146,24 +148,39 @@ export class InstructorComponent {
   }
 
   submitData() {
-    if (!this.courseName || this.totalGradingWeight !== 100 || !this.selectedFile || !this.isDataConfirmed || !this.classAttribute) {
+    if (!this.courseName || this.totalGradingWeight !== 100 || !this.isDataConfirmed || !this.classAttribute) {
       alert("Ensure all fields are filled, weightage totals 100%, class attribute selected, and CSV data is confirmed.");
       return;
     }
-
-    const formData = new FormData();
-    formData.append('courseName', this.courseName);
-    formData.append('gradingScheme', JSON.stringify(this.gradingScheme));
-    formData.append('classAttribute', this.classAttribute);
-    formData.append('file', new Blob([this.updatedCSV], { type: 'text/csv' }), 'updated_data.csv');
-
-    this.instructorService.uploadCSV(formData).subscribe({
+  
+    // Prepare JSON payload
+    const payload = {
+      courseName: this.courseName,
+      gradingScheme: this.gradingScheme,
+      classAttribute: this.classAttribute,
+      grades: this.previewData // Send the processed data directly
+    };
+    
+    this.instructorService.uploadCSV(payload).subscribe({    
       next: (response) => {
         alert(response.message);
       },
-      error: () => {
+      error: (error) => {
+        console.error("Error uploading data:", error);
         alert("Error uploading data.");
       }
     });
   }
+
+  logout(){
+    this.auth.signOut();
+    this.router.navigate(['/']);
+
+  }
+
+  goBack(){
+    this.router.navigate(['/instructor-choice']);
+
+  }
+  
 }

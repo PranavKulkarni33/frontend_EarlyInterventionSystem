@@ -11,6 +11,8 @@ import { SignupComponent } from './Components/signup/signup.component';
 import { VerificationComponent } from './Components/verification/verification.component';
 import { HomeComponent } from './Components/home/home.component';
 import { StudentComponent } from './Components/student/student.component';
+import { InstructorChoiceComponent } from './Components/instructor-choice/instructor-choice.component';
+import { InstructorPredictionComponent } from './Components/instructor-prediction/instructor-prediction.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { StudentComponent } from './Components/student/student.component';
     SignupComponent,
     VerificationComponent,
     HomeComponent,
-    StudentComponent
+    StudentComponent,
+    InstructorChoiceComponent,
+    InstructorPredictionComponent
   ],
   imports: [
     BrowserModule,

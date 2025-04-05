@@ -1,0 +1,80 @@
+<div class="container py-5">
+    <h2 class="text-center mb-4 fw-bold text-primary">Select a Model for Prediction</h2>
+  
+    <div class="row g-4">
+      <div class="col-md-6" *ngFor="let model of models">
+        <div class="card shadow border-0 rounded-4">
+          <div class="card-body">
+            <h5 class="card-title text-primary fw-bold">{{ model.courseName }}</h5>
+            <p><strong>Class Attribute:</strong> {{ model.classAttribute }}</p>
+            <p><strong>Grading Scheme:</strong></p>
+            <ul *ngIf="model.gradingScheme && objectKeys(model.gradingScheme).length > 0">
+              <li *ngFor="let key of objectKeys(model.gradingScheme)">
+                {{ key }}: {{ model.gradingScheme[key] }}%
+              </li>
+            </ul>
+            <div class="d-flex justify-content-between">
+              <button class="btn btn-outline-primary" (click)="openBatchModal(model)">Batch Prediction</button>
+              <button class="btn btn-outline-success" (click)="openIndividualModal(model)">Individual Prediction</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<!-- Batch Modal -->
+<div class="modal fade" id="batchModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content p-4">
+        <h5 class="modal-title mb-3 fw-semibold">Batch Prediction for {{ selectedModel?.courseName }}</h5>
+        
+        <input type="file" class="form-control mb-2" (change)="onBatchFileChange($event)">
+        
+        <input type="number" class="form-control mb-2" [(ngModel)]="batchThreshold" placeholder="Threshold % (e.g., 35)">
+        
+        <div *ngIf="batchFile" class="alert alert-info">
+          The prediction report will be emailed to <strong>{{ email }}</strong>
+        </div>
+  
+        <button class="btn btn-primary w-100 mt-2" (click)="runBatchPrediction()">Run Prediction</button>
+  
+        <div *ngIf="batchResult" class="mt-4">
+          <p><strong>Report URL:</strong> <a [href]="batchResult.reportUrl" target="_blank">{{ batchResult.reportUrl }}</a></p>
+          <p><strong>At-Risk Count:</strong> {{ batchResult.atRiskCount }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- Individual Modal -->
+  <div class="modal fade" id="individualModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content p-4">
+        <h5 class="modal-title mb-3 fw-semibold">Individual Prediction for {{ selectedModel?.courseName }}</h5>
+  
+        <div class="mb-3" *ngFor="let col of filteredInputColumns()">
+          <label class="form-label">{{ col }}</label>
+          <select class="form-select" [(ngModel)]="individualInputs[col]">
+            <option [ngValue]="null">No Value</option>
+            <option *ngFor="let val of scoreOptions" [ngValue]="val">{{ val }}</option>
+          </select>
+        </div>
+  
+        <textarea class="form-control mb-3" rows="2" [(ngModel)]="individualComment" placeholder="Optional comment..."></textarea>
+        <button class="btn btn-success w-100" (click)="runIndividualPrediction()">Run Prediction</button>
+  
+        <div *ngIf="individualResult" class="mt-4">
+          <h6 class="text-dark"><strong>Base:</strong> {{ individualResult.prediction.Base }}%</h6>
+          <h6 class="text-success"><strong>Optimistic:</strong> {{ individualResult.prediction.Optimistic }}%</h6>
+          <h6 class="text-danger"><strong>Pessimistic:</strong> {{ individualResult.prediction.Pessimistic }}%</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="d-flex justify-content-end mt-3">
+    <button class="btn btn-primary" (click)="goBack()">Back</button>
+  </div>
+  
