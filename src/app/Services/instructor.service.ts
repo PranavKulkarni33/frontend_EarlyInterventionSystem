@@ -6,12 +6,27 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InstructorService {
-
-  private apiUrl = 'https://your-api-url.execute-api.us-east-1.amazonaws.com/dev/upload'; // Change to actual API endpoint
+  private baseUrl = 'http://127.0.0.1:5000'; // Update if deployed elsewhere
 
   constructor(private http: HttpClient) {}
 
-  uploadCSV(formData: FormData): Observable<any> {
-    return this.http.post<any>(this.apiUrl, formData);
+  uploadCSV(payload: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/preprocess`, payload, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
+
+  getAllModels(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/models`);
+  }
+
+  runBatchPrediction(formData: FormData): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/predict-batch`, formData);
+  }
+
+  runIndividualPrediction(payload: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/predict-individual`, payload, {
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 }
