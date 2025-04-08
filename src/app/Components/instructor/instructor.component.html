@@ -19,29 +19,34 @@
       </div>
     </div>
 
-    <!-- Weightage Section -->
-    <div class="mb-4 p-3 border rounded-3 bg-light">
-      <label class="form-label fw-bold text-secondary">Assign Weightage (Total must be 100%)</label>
-      <div class="row g-2">
-        <div class="col-md-6" *ngFor="let component of selectedComponents">
-          <label class="form-label">{{ component }} (%)</label>
-          <input type="number" [(ngModel)]="gradingScheme[component]" class="form-control border-2 shadow-sm"
-                (input)="validateTotalWeight()" placeholder="Enter weight">
-        </div>
+    <!-- Weightage & Out-of Section -->
+  <div class="mb-4 p-3 border rounded-3 bg-light">
+    <label class="form-label fw-bold text-secondary">Assign Weightage and Out Of Marks</label>
+    <div class="row g-2">
+      <div class="col-md-6" *ngFor="let component of selectedComponents">
+        <label class="form-label">{{ component }} (%)</label>
+        <input type="number" [(ngModel)]="gradingScheme[component]" class="form-control border-2 shadow-sm"
+              (input)="validateTotalWeight()" placeholder="Enter weight">
       </div>
-
-      <!-- Progress Bar -->
-      <div class="progress mt-3 rounded-3" style="height: 15px;">
-        <div class="progress-bar progress-bar-striped" 
-             [class.bg-danger]="totalGradingWeight !== 100" 
-             [style.width.%]="totalGradingWeight" role="progressbar">
-          {{ totalGradingWeight }}%
-        </div>
+      <div class="col-md-6" *ngFor="let component of selectedComponents">
+        <label class="form-label">{{ component }} (Out Of)</label>
+        <input type="number" [(ngModel)]="outOfMarks[component]" class="form-control border-2 shadow-sm"
+              placeholder="e.g., 10 or 1.5">
       </div>
-      <p *ngIf="totalGradingWeight !== 100" class="text-danger mt-2 fw-semibold">
-        Total must be 100% (Current: {{ totalGradingWeight }}%)
-      </p>
     </div>
+
+    <!-- Progress Bar -->
+    <div class="progress mt-3 rounded-3" style="height: 15px;">
+      <div class="progress-bar progress-bar-striped" 
+          [class.bg-danger]="totalGradingWeight !== 100" 
+          [style.width.%]="totalGradingWeight" role="progressbar">
+        {{ totalGradingWeight }}%
+      </div>
+    </div>
+    <p *ngIf="totalGradingWeight !== 100" class="text-danger mt-2 fw-semibold">
+      Total must be 100% (Current: {{ totalGradingWeight }}%)
+    </p>
+  </div>
 
     <!-- Class Attribute Selection -->
     <div class="mb-4" *ngIf="previewColumns.length > 0">

@@ -25,6 +25,8 @@ export class InstructorPredictionComponent implements OnInit {
   scoreOptions: number[] = Array.from({ length: 101 }, (_, i) => i); // 0 to 100
   objectKeys = Object.keys;
   email: string = '';
+  noValueSelected: { [key: string]: boolean } = {};
+
 
   constructor(private instructorService: InstructorService, private router: Router, private auth : AuthService) {}
 
@@ -35,11 +37,15 @@ export class InstructorPredictionComponent implements OnInit {
   
     this.instructorService.getAllModels().subscribe({
       next: (response: any) => {
+        console.log('Model Metadata Response:', response);
         this.models = (Object.entries(response) as [string, ModelMetadata][])
-          .map(([course, metadata]) => ({
-            courseName: course,
-            ...metadata
-          }));
+        .map(([course, metadata]) => ({
+          courseName: course,
+          gradingScheme: metadata.gradingScheme,
+          outOfMarks: metadata.outOfMarks || {},
+          classAttribute: metadata.classAttribute,
+          columns: metadata.columns
+        }));
       },
       error: (err) => {
         console.error('Failed to load models:', err);
@@ -59,9 +65,29 @@ export class InstructorPredictionComponent implements OnInit {
     this.selectedModel = model;
     this.individualInputs = {};
     this.individualResult = null;
+    this.noValueSelected = {}; // Reset checkboxes
     const modal = new (window as any).bootstrap.Modal(document.getElementById('individualModal'));
     modal.show();
   }
+  
+
+  handleNoValueToggle(col: string) {
+    if (this.noValueSelected[col]) {
+      this.individualInputs[col] = null;
+    }
+  }
+  
+  getOutOfMark(col: string): number | null {
+    if (!this.selectedModel?.outOfMarks) return null;
+  
+    if (col.toLowerCase().includes("quiz")) return this.selectedModel.outOfMarks["Quiz"];
+    if (col.toLowerCase().includes("midterm")) return this.selectedModel.outOfMarks["Midterm"];
+    if (col.toLowerCase().includes("final")) return this.selectedModel.outOfMarks["Final"];
+    if (this.selectedModel.outOfMarks[col]) return this.selectedModel.outOfMarks[col];
+  
+    return null;
+  }
+  
 
   onBatchFileChange(event: any) {
     this.batchFile = event.target.files[0];
@@ -98,7 +124,7 @@ export class InstructorPredictionComponent implements OnInit {
       inputValues: this.individualInputs,
       comment: this.individualComment
     };
-
+  
     this.instructorService.runIndividualPrediction(payload).subscribe({
       next: (res) => this.individualResult = res,
       error: (err) => {
@@ -107,6 +133,7 @@ export class InstructorPredictionComponent implements OnInit {
       }
     });
   }
+  
 
   filteredInputColumns(): string[] {
     if (!this.selectedModel?.columns || !this.selectedModel?.classAttribute) return [];

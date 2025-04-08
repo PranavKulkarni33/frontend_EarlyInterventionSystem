@@ -30,12 +30,14 @@ export class StudentComponent implements OnInit {
   ngOnInit(): void {
     this.instructorService.getAllModels().subscribe({
       next: (response: any) => {
-        this.models = (Object.entries(response) as [string, ModelMetadata][]).map(
-          ([course, metadata]) => ({
-            courseName: course,
-            ...metadata
-          })
-        );
+        this.models = (Object.entries(response) as [string, ModelMetadata][]).map(([course, metadata]) => ({
+          courseName: course,
+          gradingScheme: metadata.gradingScheme,
+          outOfMarks: metadata.outOfMarks || {},
+          classAttribute: metadata.classAttribute,
+          columns: metadata.columns
+        }));
+        
       },
       error: (err) => console.error('Failed to load models:', err)
     });

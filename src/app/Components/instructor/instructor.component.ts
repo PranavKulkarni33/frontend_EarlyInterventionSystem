@@ -19,9 +19,12 @@ export class InstructorComponent {
   selectedFile: File | null = null;
   previewData: any[] = [];
   previewColumns: string[] = [];
-  classAttribute: string = '';  // Selected class attribute
+  classAttribute: string = '';  
   isDataConfirmed: boolean = false;
-  updatedCSV: string = '';  // Stores the processed CSV data
+  updatedCSV: string = '';  
+  outOfMarks: { [key: string]: number } = {};
+  fullData: any[] = [];
+
 
   constructor(private instructorService: InstructorService, private auth : AuthService, private router: Router) {}
 
@@ -29,9 +32,11 @@ export class InstructorComponent {
     if (event.target.checked) {
       this.selectedComponents.push(component);
       this.gradingScheme[component] = 0;
+      this.outOfMarks[component] = 1; 
     } else {
       this.selectedComponents = this.selectedComponents.filter(item => item !== component);
       delete this.gradingScheme[component];
+      delete this.outOfMarks[component];
     }
   }
 
@@ -138,7 +143,8 @@ export class InstructorComponent {
           console.log("Processed Data Preview:", data.slice(0, 5));
 
           // Show first 5 rows in preview
-          this.previewData = data.slice(0, 5);
+          this.fullData = data; // ✅ Store full processed data
+          this.previewData = data.slice(0, 5); // Just for UI preview
           this.previewColumns = Object.keys(this.previewData[0] || {});
           this.isDataConfirmed = true;
         }
@@ -153,18 +159,16 @@ export class InstructorComponent {
       return;
     }
   
-    // Prepare JSON payload
     const payload = {
       courseName: this.courseName,
       gradingScheme: this.gradingScheme,
+      outOfMarks: this.outOfMarks,
       classAttribute: this.classAttribute,
-      grades: this.previewData // Send the processed data directly
+      grades: this.fullData
     };
-    
-    this.instructorService.uploadCSV(payload).subscribe({    
-      next: (response) => {
-        alert(response.message);
-      },
+  
+    this.instructorService.uploadCSV(payload).subscribe({
+      next: (response) => alert(response.message),
       error: (error) => {
         console.error("Error uploading data:", error);
         alert("Error uploading data.");
