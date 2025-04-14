@@ -87,6 +87,12 @@ export class InstructorPredictionComponent implements OnInit {
   
     return null;
   }
+
+  logout(){
+    this.auth.signOut();
+    this.router.navigate(['/']);
+
+  }
   
 
   onBatchFileChange(event: any) {

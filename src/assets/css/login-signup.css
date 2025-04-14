@@ -76,7 +76,7 @@ button:focus {
 .btn-gray {
     border-radius: 50px;
     color: #fff;
-    background-color: #BDBDBD;
+    background-color: rgba(1, 92, 153, 0.459);
     padding: 8px 40px;
 }
 

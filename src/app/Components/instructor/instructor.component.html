@@ -1,3 +1,14 @@
+<nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
+  <div class="container-fluid">
+      <a class="navbar-brand" href="#">Early Intervention at YorkU</a>
+      <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse d-flex" id="navcol-1">
+          <div class="col d-flex justify-content-end">
+              <div class="log-sin btn btn-light action-button" role="button" (click)="logout()">Logout</div>
+          </div>
+      </div>
+  </div>
+</nav>
 <div class="container mt-4">
   <div class="card shadow-lg p-4 border-0 rounded-4">
     <h2 class="text-center mb-4 fw-bold text-primary">Instructor Panel</h2>
@@ -92,12 +103,6 @@
             [disabled]="!isDataConfirmed || !classAttribute || totalGradingWeight !== 100">
       Upload Data
     </button>
-
-    <button (click)="logout()" class="btn btn-primary w-100 mt-3 py-2 fw-semibold" 
-            >
-      Logout
-    </button>
-
     <button (click)="goBack()" class="btn btn-primary w-100 mt-3 py-2 fw-semibold" 
             >
       Back

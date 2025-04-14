@@ -1,19 +1,30 @@
+<nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
+  <div class="container-fluid">
+      <a class="navbar-brand" href="#">Early Intervention at YorkU</a>
+      <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse d-flex" id="navcol-1">
+          <div class="col d-flex justify-content-end">
+              <div class="log-sin btn btn-light action-button" role="button" (click)="logout()">Logout</div>
+          </div>
+      </div>
+  </div>
+</nav>
 <div class="container py-5">
-    <h2 class="text-center mb-4 fw-bold text-primary">Select a Model for Prediction</h2>
+    <h2 class="text-center mb-4 fw-bold">Select a Model for Prediction</h2>
   
     <div class="row g-4">
       <div class="col-md-6" *ngFor="let model of models">
-        <div class="card shadow border-0 rounded-4">
+        <div class="card shadow-sm border-0 rounded-4 text-center">
           <div class="card-body">
             <h5 class="card-title text-primary fw-bold">{{ model.courseName }}</h5>
             <p><strong>Class Attribute:</strong> {{ model.classAttribute }}</p>
             <p><strong>Grading Scheme:</strong></p>
-            <ul *ngIf="model.gradingScheme && objectKeys(model.gradingScheme).length > 0">
+            <ul class="list-unstyled" *ngIf="model.gradingScheme && objectKeys(model.gradingScheme).length > 0">
               <li *ngFor="let key of objectKeys(model.gradingScheme)">
                 {{ key }}: {{ model.gradingScheme[key] }}%
               </li>
             </ul>
-            <div class="d-flex justify-content-between">
+            <div class="d-flex justify-content-center gap-3 mt-3">
               <button class="btn btn-outline-primary" (click)="openBatchModal(model)">Batch Prediction</button>
               <button class="btn btn-outline-success" (click)="openIndividualModal(model)">Individual Prediction</button>
             </div>
@@ -93,7 +104,7 @@
 
   
   
-  <div class="d-flex justify-content-end mt-3">
+  <div class="d-flex justify-content-center mt-5">
     <button class="btn btn-primary" (click)="goBack()">Back</button>
   </div>
   

@@ -1,0 +1,113 @@
+body{
+    font-family: 'Source Sans Pro', sans-serif;
+    background-color: rgb(243, 243, 245) !important;
+  }
+  nav {
+      background-color: #006699 !important;
+      position: sticky;
+      top:1px;
+      z-index: 1000;
+    }
+  
+    .log-sin{
+      background-color: #006699;
+      transition: 1s;
+    }
+    .log-sin:hover{
+      background: rgb(245, 247, 250) !important;
+      color: #006699 !important;
+    }
+    .navbar {
+      background: transparent;
+      padding-top: .75rem;
+      padding-bottom: .75rem;
+      color: #fff;
+      border-radius: 0;
+      box-shadow: none;
+      border: none;
+    }
+    
+    @media (min-width:768px) {
+      .header-blue .navbar {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+    }
+    .navbar .navbar-brand {
+      font-weight: bold;
+      color: inherit;
+    }
+     .navbar .navbar-brand:hover {
+      color: #f0f0f0;
+    }
+    
+.navbar .navbar-collapse {
+      border-top: 1px solid rgba(255,255,255,0.3);
+      margin-top: .5rem;
+      place-items: space-between;
+    }
+    
+    @media (min-width:768px) {
+   .navbar .navbar-collapse {
+        border-color: transparent;
+        margin: 0;
+      }
+    }
+    
+    .navbar .navbar-collapse span .login {
+      color: #fff;
+      margin-right: .5rem;
+      text-decoration: none;
+    }
+    
+     .navbar .navbar-collapse span .login:hover {
+      color: #fff;
+    }
+    
+      .navbar .navbar-toggler {
+      border-color: rgba(255,255,255,0.3);
+    }
+    
+      .navbar .navbar-toggler:hover,   .navbar-toggler:focus {
+      background: none;
+    }
+    
+    @media (min-width: 768px) {
+        .navbar-nav .nav-link {
+        padding-left: .7rem;
+        padding-right: .7rem;
+      }
+    }
+    
+    @media (min-width: 992px) {
+        .navbar-nav .nav-link {
+        padding-left: 1.2rem;
+        padding-right: 1.2rem;
+      }
+    }
+    
+      .navbar.navbar-light .navbar-nav .nav-link {
+      color: #fff;
+    }
+    
+      .navbar.navbar-light .navbar-nav .nav-link:focus,   .navbar.navbar-light .navbar-nav .nav-link:hover {
+      color: #fcfeff !important;
+      background-color: transparent;
+    }
+    
+      .action-button,   .action-button:not(.disabled):active {
+      border: 1px solid rgb(255,255,255);
+      border-radius: 40px;
+      color: #fff;
+      box-shadow: none;
+      text-shadow: none;
+      padding: .3rem .8rem;
+      background: transparent;
+      transition: background-color 0.25s;
+      outline: none;
+    }
+    
+      .action-button:hover {
+      color: #fff;
+    }
+    

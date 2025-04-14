@@ -1,17 +1,9 @@
-
-
 <div class="header-blue">
     <nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
-        <div class="container-fluid"><a class="navbar-brand" href="#">Early Intervention at YorkU</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Early Intervention at YorkU</a>
+            <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse d-flex" id="navcol-1">
-                <div class="col">
-                    <ul class="nav navbar-nav">
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="#">Contact</a></li>
-                        <li class="nav-item dropdown"><a class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false" href="#">Services</a>
-                            <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation" href="#">Logo design</a><a class="dropdown-item" role="presentation" href="#">Banner design</a><a class="dropdown-item" role="presentation" href="#">content writing</a></div>
-                        </li>
-                    </ul>
-                </div>
                 <div class="col d-flex justify-content-end">
                     <div class="log-sin btn btn-light action-button mx-3" (click)="openLogin()">Log In</div>
                     <div class="log-sin btn btn-light action-button" role="button" (click)="openSignup()">Signup</div>
@@ -19,13 +11,14 @@
             </div>
         </div>
     </nav>
-    <div class="container hero">
+    <div class="container-fluid hero">
         <div class="row">
             <div class="col-12 col-lg-6 col-xl-5 offset-xl-1">
                 <h1>Early Intervention System</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.<br></p>
-                <button
-                    class="btn btn-light btn-l" type="button">Learn More<i class="fa fa-long-arrow-right ml-2"></i></button>
+                <h3>Empowering instructors. Supporting students. Predicting success.</h3>
+                <p>eClass offers a wealth of student data — but much of it disappears too quickly to act on. The <b>Early Intervention System</b> bridges this gap by capturing, analyzing, and predicting student performance using intelligent, AI-driven insights.</p>
+                <p>The Early Intervention System is a prototype project developed as part of EECS 4088 – Engineering Capstone Project at York University. Our goal is to harness the rich but fleeting data available in Moodle — York’s Learning Management System — and turn it into actionable insights using machine learning.</p>
+
             </div>
             <div class="col-md-5 col-lg-5 offset-lg-1 offset-xl-0 d-none d-lg-block phone-holder">
                 <div class="iphone-mockup">
@@ -33,5 +26,50 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="container-fluid hero second ms-1 me-1 text-center justify-content-centre">
+        <h2>
+            This platform allows instructors to:
+        </h2>
+        <div class="row mb-4">
+            <div class="col card text-center border-primary">
+                <div class="card-body">
+                  <!-- <h5 class="card-title">Special title treatment</h5> -->
+                  <p class="card-text">Upload and analyze course data.</p>
+                </div>
+            </div>
+            <div class=" col card text-center text-bg-secondary ">
+                <div class="card-body">
+                  <p class="card-text">Train predictive models on past student performance.</p>
+                </div>
+            </div>
+            <div class=" col card text-center border-primary">
+                <div class="card-body">
+                  <p class="card-text">Receive intelligent alerts about students who may be at academic risk.</p>
+                </div>
+            </div>
+        </div>
+        <h2>
+            Students can:
+        </h2>
+        <div class="row">
+            <div class="col card text-center border-primary">
+                <div class="card-body">
+                  <!-- <h5 class="card-title">Special title treatment</h5> -->
+                  <p class="card-text">View their progress.</p>
+                </div>
+            </div>
+            <div class=" col card text-center text-bg-secondary ">
+                <div class="card-body">
+                  <p class="card-text">Receive feedback based on their own input and historical patterns.</p>
+                </div>
+            </div>
+            <div class=" col card text-center border-primary">
+                <div class="card-body">
+                  <p class="card-text">Interpret if they need to pull up their socks in the course.</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

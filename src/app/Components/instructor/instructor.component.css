@@ -1,0 +1,128 @@
+/* instructor-panel-style.css */
+
+:root {
+    --theme-blue: #006699;
+    --light-gray: #f8f9fa;
+    --soft-border: #dee2e6;
+    --heading-weight: 600;
+  }
+  
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fff;
+    color: #212529;
+  }
+  
+  .text-primary,
+  .btn-primary,
+  .btn-outline-primary,
+  .card-title.text-primary,
+  .table-dark {
+    color: var(--theme-blue) !important;
+  }
+  
+  .btn-primary {
+    background-color: var(--theme-blue) !important;
+    border-color: var(--theme-blue) !important;
+  }
+  
+  .btn-primary:hover {
+    background-color: #005377 !important;
+    border-color: #005377 !important;
+    color: #fff !important;
+  }
+  
+  .btn-outline-primary {
+    border-color: var(--theme-blue);
+    color: var(--theme-blue);
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: var(--theme-blue);
+    color: #fff;
+  }
+  
+  .btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+  }
+  
+  .btn-outline-secondary:hover {
+    background-color: #6c757d;
+    color: #fff;
+  }
+  
+  h2, h4 {
+    font-weight: var(--heading-weight);
+  }
+  
+  .card {
+    background-color: #fff;
+    border-radius: 1rem;
+    border: none;
+  }
+  
+  .form-control,
+  .form-select {
+    border: 2px solid var(--soft-border);
+    border-radius: 0.5rem;
+    box-shadow: none;
+  }
+  
+  .form-control:focus,
+  .form-select:focus {
+    border-color: var(--theme-blue);
+    box-shadow: 0 0 0 0.1rem rgba(0, 102, 153, 0.25);
+  }
+  
+  label.form-label,
+  .text-secondary {
+    font-weight: 500;
+  }
+  
+  .progress {
+    background-color: #e9ecef;
+  }
+  
+  .table th,
+  .table td {
+    vertical-align: middle;
+  }
+  
+  .table thead.table-dark {
+    background-color: var(--theme-blue);
+    color: #fff;
+  }
+  
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: var(--light-gray);
+  }
+  
+  .shadow-sm,
+  .shadow-lg {
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05) !important;
+  }
+  
+  button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+  
+  button {
+    place-self: center;
+    transition: all 0.2s ease-in-out;
+    width: 10rem !important;
+  }
+  
+  button:hover {
+    transform: scale(1.02);
+    opacity: 0.95;
+  }
+  
+  .table-responsive {
+    background-color: white;
+    padding: 1rem;
+    border: 1px solid var(--soft-border);
+    border-radius: 1rem;
+  }
+  

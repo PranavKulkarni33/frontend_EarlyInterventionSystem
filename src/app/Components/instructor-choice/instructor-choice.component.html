@@ -1,39 +1,55 @@
-<div class="container mt-5">
-    <h2 class="text-center text-primary fw-bold mb-5">What would you like to do?</h2>
-  
-    <div class="row justify-content-center g-5">
-      <!-- Create Model Card -->
-      <div class="col-md-5">
-        <div class="card choice-card shadow-lg h-100">
-          <div class="card-body d-flex flex-column justify-content-between">
-            <div>
-              <h4 class="card-title text-primary fw-bold">Create a New Model</h4>
-              <p class="card-text mt-3 text-secondary">
-                Upload student data for your course, define grading weightage, and preprocess the CSV to train a new prediction model. Ideal for new instructors or courses with updated evaluations.
-              </p>
-            </div>
-            <button class="btn btn-outline-primary w-100 mt-4 fw-semibold" (click)="goToCreateModel()">Start New Model</button>
+<nav class="navbar navbar-light navbar-expand-md navigation-clean-search">
+  <div class="container-fluid">
+      <a class="navbar-brand" href="#">Early Intervention at YorkU</a>
+      <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+      <div class="collapse navbar-collapse d-flex" id="navcol-1">
+          <div class="col d-flex justify-content-end">
+              <div class="log-sin btn btn-light action-button" role="button" (click)="logout()">Logout</div>
           </div>
-        </div>
-      </div>
-  
-      <!-- Predict Using Model Card -->
-      <div class="col-md-5">
-        <div class="card choice-card shadow-lg h-100">
-          <div class="card-body d-flex flex-column justify-content-between">
-            <div>
-              <h4 class="card-title text-success fw-bold">Use Existing Model</h4>
-              <p class="card-text mt-3 text-secondary">
-                Use an already-trained model to input specific student details and receive predicted outcomes using AI and course performance data.
-              </p>
-            </div>
-            <button class="btn btn-outline-success w-100 mt-4 fw-semibold" (click)="goToPrediction()">Use Existing Model</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="d-flex justify-content-end mt-3">
-        <button class="btn btn-primary" (click)="logout()">Logout</button>
       </div>
   </div>
+</nav>
+
+
+<div class="instructor-cards row flex-row">
+  <h2 style="color: black;" class="text-center">How would you like to proceed?</h2>
+  <div class="card me-5">
+    <img
+      class="card__background"
+      src="../../../assets/images/2149241014.jpg"
+      alt="Photo of Cartagena's cathedral at the background and some colonial style houses"
+      width="1920"
+      height="2193"
+    />
+    <div class="card__content | flow">
+      <div class="card__content--container | flow">
+        <h2 class="card__title">Pre Trained</h2>
+        <p class="card__description mb-0">
+          Choose from one of our Pre-Trained models.
+        </p>
+      </div>
+      <button class="card__button m-0" (click)="goToPrediction()">Read more</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <img
+      class="card__background"
+      src="../../../assets/images/2148950575.jpg"
+      alt="Photo of Cartagena's cathedral at the background and some colonial style houses"
+      width="1920"
+      height="2193"
+    />
+    <div class="card__content | flow">
+      <div class="card__content--container | flow">
+        <h2 class="card__title">Bespoke</h2>
+        <p class="card__description mb-0">
+          Train your own model tailored to your needs.
+        </p>
+      </div>
+      <button class="card__button m-0" (click)="goToCreateModel()">Read more</button>
+    </div>
+  </div>
+</div>
+
   

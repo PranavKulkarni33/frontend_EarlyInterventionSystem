@@ -1,5 +1,6 @@
 .card {
     transition: transform 0.2s ease-in-out;
+    border: 1px solid #006699 !important;
   }
   
   .card:hover {
@@ -8,7 +9,7 @@
   
   .modal-content {
     border-radius: 1rem;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   }
   
   h2 {
